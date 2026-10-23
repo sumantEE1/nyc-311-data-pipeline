@@ -126,3 +126,10 @@ Data profiling findings
     * Fixed fields cointaining PII(IP Address, Co Ordinates, names)- identify and flag
         - location contains Co ordinates
         - latitude and longitude contains co-ordinates
+        - INCIDENT_ADDRESS
+
+    * business 
+        select status, agency, count(*) as status_per_agency from NYC_311_DATASET group by status,agency
+
+        select COMPLAINT_TYPE, agency, count(*) as aggregate from NYC_311_DATASET group by COMPLAINT_TYPE,agency
+
