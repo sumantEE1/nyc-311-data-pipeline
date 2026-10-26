@@ -133,3 +133,37 @@ Data profiling findings
 
         select COMPLAINT_TYPE, agency, count(*) as aggregate from NYC_311_DATASET group by COMPLAINT_TYPE,agency
 
+
+
+Used the variables of previous project.
+    Snowflake stage
+        - Temp storage before inserting/importing the data to/from table
+        - External stage when files are stored externally
+    Storage integration 
+        - Stores the IAM / generated identity GCS bucket / AWS S3/ Azure
+        - Set of allowed location    `STORAGE_ALLOWED_LOCATIONS`
+
+Create terraform folder
+    Added main.tf
+        Added required provider 
+            terraform {
+                required_providers {
+                    snowflake = {
+                    source = "snowflakedb/snowflake"
+                    }
+                }
+            }
+        Executed terraform init
+            installed snowflakedb/snowflake v2.22.0
+
+            it created a file .terraform.lock.hcl  to record the provider selection
+
+Created schema in warehouse `SNOWFLAKE_LEARNING_WH` and database `DE_CROSS_SKILLING_NYC_311`  
+    - SUMANT_RAW  
+    - SUMANT_CONSUME
+    - SUMANT_CURATED
+
+Created table in SUMANT_RAW
+    SUMANT_DEY_RAW_NYC_311_DATA_TABLE
+
+Created (using) GCS bucket 
