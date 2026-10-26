@@ -167,3 +167,11 @@ Created table in SUMANT_RAW
     SUMANT_DEY_RAW_NYC_311_DATA_TABLE
 
 Created (using) GCS bucket 
+
+
+Started airflow using docker compose
+
+Added DAG GCS to GCS operator whichj uses google cloud platform connection
+    ** note the key file path threw error, instead copied the json directly to key file json 
+    ** for every update in a field, restarted the docker compose to persist the change
+    
