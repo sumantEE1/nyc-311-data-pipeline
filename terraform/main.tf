@@ -15,7 +15,7 @@ provider "snowflake" {
     private_key       = file(var.private_key_path)
 
     # Enable the preview feature
-    preview_features_enabled = ["snowflake_table_resource"]
+    preview_features_enabled = ["snowflake_table_resource","snowflake_pipe_resource"]
 }
 
 # Define the RAW schema within that database
@@ -272,4 +272,25 @@ resource "snowflake_stage_external_gcs" "gcs_stage" {
         skip_header     = 1
     }
   }
+}
+
+resource "snowflake_file_format_csv" "basic" {
+  database = var.database_name
+  schema   = var.schema_name
+  name     = var.file_format_name
+}
+
+resource "snowflake_pipe" "csv_nyc_311_snowpipe" {
+  database = var.database_name
+  schema   = var.schema_name
+  name     = "SUMANT_NYC_311_SNOW_PIPE"
+  comment  = "A pipe to load nyc service requests data from GCS bucket to snowflake table"
+  auto_ingest = false
+  copy_statement = <<SQL
+    COPY INTO ${var.database_name}.${var.schema_name}.${var.table_name}
+      (UNIQUE_KEY, CREATED_DATE, CLOSED_DATE, AGENCY, AGENCY_NAME, COMPLAINT_TYPE, DESCRIPTOR, LOCATION_TYPE, INCIDENT_ZIP, INCIDENT_ADDRESS, STREET_NAME, CROSS_STREET_1, CROSS_STREET_2, INTERSECTION_STREET_1, INTERSECTION_STREET_2, ADDRESS_TYPE, CITY, LANDMARK, FACILITY_TYPE, STATUS, DUE_DATE, RESOLUTION_DESCRIPTION, RESOLUTION_ACTION_UPDATED_DATE, COMMUNITY_BOARD, BOROUGH, X_COORDINATE, Y_COORDINATE, PARK_FACILITY_NAME, PARK_BOROUGH, BBL, OPEN_DATA_CHANNEL_TYPE, VEHICLE_TYPE, TAXI_COMPANY_BOROUGH, TAXI_PICKUP_LOCATION, BRIDGE_HIGHWAY_NAME, BRIDGE_HIGHWAY_DIRECTION, ROAD_RAMP, BRIDGE_HIGHWAY_SEGMENT, LATITUDE, LONGITUDE, LOCATION)
+      FROM @${var.database_name}.${var.schema_name}.${var.stage_name}
+      FILE_FORMAT = (FORMAT_NAME = ${var.database_name}.${var.schema_name}.${var.file_format_name})
+      ON_ERROR = 'CONTINUE';
+    SQL
 }

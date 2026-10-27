@@ -81,8 +81,8 @@ variable gcs_bucket_url {
   description = "description"
 }
 
-variable notification_integration_name {
+variable file_format_name {
   type        = string
-  default     = "gcs_nyc311_notification_int"
+  default     = "SUMANT_GCS_FILE_FORMAT"
   description = "description"
 }

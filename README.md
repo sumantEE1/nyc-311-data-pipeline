@@ -176,4 +176,13 @@ Started airflow using docker compose
 Added DAG GCS to GCS operator whichj uses google cloud platform connection
     ** note the key file path threw error, instead copied the json directly to key file json 
     ** for every update in a field, restarted the docker compose to persist the change
+
+Created csv file format `snowflake_file_format_csv` name `SUMANT_GCS_FILE_FORMAT` using terraform
+
+Created snowpipe with copy into sql using the file format using terraform
+
+Ran sql query 
+```ALTER PIPE DE_CROSS_SKILLING_NYC_311.SUMANT_RAW.SUMANT_NYC_311_SNOW_PIPE REFRESH;```
+
+snowpipe can be configured to run on an event or time, streaming data
     
