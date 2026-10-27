@@ -64,7 +64,7 @@ variable schema_name_consume {
 
 variable table_name{
   type        = string
-  default     = "SUMANT_RAW_NYC_311_DATA_TABLE"
+  default     = "SUMANT_NYC_311_DATA_TABLE"
   description = "description"
 }
 
@@ -72,7 +72,7 @@ variable table_name{
 variable stage_name {
   type        = string
   default     = "SUMANT_GCS_BUCKET_STAGE"
-  description = "description"
+  description = "external stage name to access the GCS bucket"
 }
 
 variable gcs_bucket_url {

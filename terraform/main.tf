@@ -37,7 +37,7 @@ resource "snowflake_schema" "SUMANT_CONSUME" {
   comment             = "Schema for consume layers "
 }
 
-resource "snowflake_table" "SUMANT_DEY_RAW_NYC_311_DATA_TABLE" {
+resource "snowflake_table" "SUMANT_NYC_311_DATA_TABLE" {
   
   database = var.database_name
   schema   = var.schema_name
@@ -257,4 +257,19 @@ resource "snowflake_table" "SUMANT_DEY_RAW_NYC_311_DATA_TABLE" {
             constant = "CURRENT_TIMESTAMP()"
         }
     }
+}
+
+
+resource "snowflake_stage_external_gcs" "gcs_stage" {
+  database            = var.database_name
+  schema              = var.schema_name
+  name                = var.stage_name
+  url                 = var.gcs_bucket_url
+  storage_integration = var.gcs_integration_name
+  file_format {
+    csv{
+        field_delimiter = ","
+        skip_header     = 1
+    }
+  }
 }

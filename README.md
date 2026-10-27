@@ -163,11 +163,13 @@ Created schema in warehouse `SNOWFLAKE_LEARNING_WH` and database `DE_CROSS_SKILL
     - SUMANT_CONSUME
     - SUMANT_CURATED
 
-Created table in SUMANT_RAW
-    SUMANT_DEY_RAW_NYC_311_DATA_TABLE
+Created table in SUMANT_RAW schema
+    SUMANT_NYC_311_DATA_TABLE
 
 Created (using) GCS bucket 
 
+Created external snowflake stage
+    `SUMANT_GCS_BUCKET_STAGE`
 
 Started airflow using docker compose
 
