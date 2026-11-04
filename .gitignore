@@ -45,3 +45,4 @@ terraform.rc
 airflow/logs
 airflow/dags/__pycache__/
 .DS_Store
+dbt/logs

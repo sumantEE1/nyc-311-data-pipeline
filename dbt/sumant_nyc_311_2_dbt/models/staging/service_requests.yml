@@ -1,0 +1,8 @@
+sources:
+  - name: SUMANT_RAW #schema name is the name of the source
+    description: "Load NYC 311 Service Requests"
+    # database: DE_CROSS_SKILLING_NYC_311
+    # schema: SUMANT_RAW
+    tables:
+      - name: SUMANT_NYC_311_DATA_TABLE
+        description: "NYC 311 Service Requests"
